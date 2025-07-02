@@ -4,15 +4,16 @@ services:
   n8n:
     image: n8nio/n8n
     ports:
-      - "80:5678"
+      - "80:5678"  # ← ini penting agar Railway bisa akses dari luar
     environment:
-      - GENERIC_TIMEZONE=Asia/Jakarta
       - N8N_BASIC_AUTH_ACTIVE=true
       - N8N_BASIC_AUTH_USER=admin
       - N8N_BASIC_AUTH_PASSWORD=passwordku123
       - N8N_HOST=0.0.0.0
-      - WEBHOOK_URL=https://<YOUR_RAILWAY_DOMAIN>
-      - N8N_EDITOR_BASE_URL=https://<YOUR_RAILWAY_DOMAIN>
       - N8N_PORT=5678
-    volumes:
-      - ./n8n_data:/home/node/.n8n
+      - WEBHOOK_TUNNEL_URL=https://n8n-railway.up.railway.app
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5678/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
