@@ -1,0 +1,13 @@
+# Folder penyimpanan lokal n8n (agar tidak ikut dikirim ke GitHub)
+n8n_data/
+
+# File environment / config sensitif (jika kamu nanti menambahkan .env)
+.env
+
+# Node.js (jika kamu tambahkan skrip npm di masa depan)
+node_modules/
+
+# File log atau cache (opsional)
+*.log
+*.tmp
+.DS_Store
